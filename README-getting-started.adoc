@@ -1,0 +1,10 @@
+= Getting Started
+
+== Environment
+
+=== MIT Scheme
+* `sudo apt install mit-scheme mit-scheme-doc`
+
+=== Emacs + quack
+* `sudo apt install emacs`
+* `sudo apt install emacs-goodies-el`
