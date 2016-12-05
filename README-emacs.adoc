@@ -1,0 +1,9 @@
+= Emacs key combos
+
+|============
+|Split the window| `C-x 2`
+|Start scheme| `M-x run-scheme`
+|Send the last expression to your Scheme process| `C-x C-e`
+|Send the whole buffer (select all, copy, send region)| `C-x h C-c C-r`
+|Load a file| `C-c C-l`
+|============
