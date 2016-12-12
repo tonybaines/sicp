@@ -1,3 +1,4 @@
+#lang scheme
 ;;; exercise 1.1
 10
 
@@ -45,14 +46,21 @@ a)
 
 
 ;;; exercise 1.3
-(define (larger-of p q) (if (> p q) p q) )
-(define (square x) (* x x))
+
 (define (sum-of-largest-two-squares x y z)
-   (if (> x y)
+  (define (square x) (* x x))
+  (define (larger-of p q) (if (> p q) p q) )
+  (if (> x y)
        (+ (square x) (square (larger-of y z)))
        (+ (square y) (square (larger-of x z)))
-   )
-   )
+  )
+)
+
+;; > (sum-of-largest-two-squares 2 3 4)
+;; 25
+;; > (sum-of-largest-two-squares 2 5 4)
+;; 41
+
 
 ;;; exercise 1.4
 ;; Either add (if b >= 0), or subtract (if b < 0) a from b
@@ -78,40 +86,49 @@ a)
 ;; (sqrt-iter 1.0 2e200)
 ;;Floating-point overflow
 
-(define (average x y) (/ (+ x y) 2))
+(define (sqrt x)
+  (define (average x y) (/ (+ x y) 2))
 
-(define (improve guess x)
-  (average guess (/ x guess)))
+  (define (improve guess x)
+    (average guess (/ x guess)))
 
-(define (good-enough? prev-guess guess)
-  (< (abs (- guess prev-guess)) 0.001))
+  (define (good-enough? prev-guess guess)
+    (< (abs (- guess prev-guess)) 0.001))
 
-(define (sqrt-iter prev-guess guess x)
-  (if (good-enough? prev-guess guess)
-      guess
-      (sqrt-iter guess (improve guess x) x)))
+  (define (sqrt-iter prev-guess guess x)
+    (if (good-enough? prev-guess guess)
+        guess
+        (sqrt-iter guess (improve guess x) x)))
+  
+  (sqrt-iter 0 1.0 x)
+)
 
 ;; Not for small numbers
-;; > (sqrt-iter 0 1.0 0.00000000000000000000000000002)
+;; > (sqrt 0.00000000000000000000000000002)
 ;; => Value: .0009765625
 ;;
 ;; Better for large 
-;;> (sqrt-iter 0 1.0 2e200)
+;;> (sqrt 2e200)
 ;; => Value: 1.414213562373095e100
 
 ;;; exercise 1.8
 
-(define (improve-cube-root-guess guess x)
-  (/
-   (+ (/ x (square guess)) (* 2 guess))
-   3
-   )
+(define (cube-root x)
+  (define (square x) (* x x))
+  (define (improve-cube-root-guess guess x)
+    (/
+     (+ (/ x (square guess)) (* 2 guess))
+     3
+     )
+    )
+
+  (define (good-enough? prev-guess guess)
+    (< (abs (- guess prev-guess)) 0.001))
+
+  (define (cube-root-iter prev-guess guess x)
+    (if (good-enough? prev-guess guess)
+        guess
+        (cube-root-iter guess (improve-cube-root-guess guess x) x)))
+
+  (cube-root-iter 0 1.0 x)
 )
-
-(define (good-enough? prev-guess guess)
-  (< (abs (- guess prev-guess)) 0.001))
-
-(define (cube-root prev-guess guess x)
-  (if (good-enough? prev-guess guess)
-      guess
-      (cube-root guess (improve-cube-root-guess guess x) x)))
