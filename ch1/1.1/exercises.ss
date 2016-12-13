@@ -18,20 +18,20 @@
 (= a b)
 
 (if (and (> b a) (< b (* a b)))
-b
-a)
+    b
+    a)
 (cond (
        (= a 4) 6)
-       ((= b 4) (+ 6 7 a))
-       (else 25))
+      ((= b 4) (+ 6 7 a))
+      (else 25))
 
 (+ 2 (if (> b a) b a))
 
 (* (cond
-        ((> a b) a)
-	((< a b) b)
-	(else -1)
-   )
+     ((> a b) a)
+     ((< a b) b)
+     (else -1)
+     )
    (+ a 1)
    )
 
@@ -51,10 +51,10 @@ a)
   (define (square x) (* x x))
   (define (larger-of p q) (if (> p q) p q) )
   (if (> x y)
-       (+ (square x) (square (larger-of y z)))
-       (+ (square y) (square (larger-of x z)))
+      (+ (square x) (square (larger-of y z)))
+      (+ (square y) (square (larger-of x z)))
+      )
   )
-)
 
 ;; > (sum-of-largest-two-squares 2 3 4)
 ;; 25
@@ -93,7 +93,10 @@ a)
     (average guess (/ x guess)))
 
   (define (good-enough? prev-guess guess)
-    (< (abs (- guess prev-guess)) 0.001))
+    (< (/
+        (abs (- guess prev-guess))
+        guess
+        ) 0.001))
 
   (define (sqrt-iter prev-guess guess x)
     (if (good-enough? prev-guess guess)
@@ -101,7 +104,7 @@ a)
         (sqrt-iter guess (improve guess x) x)))
   
   (sqrt-iter 0 1.0 x)
-)
+  )
 
 ;; Not for small numbers
 ;; > (sqrt 0.00000000000000000000000000002)
@@ -123,7 +126,10 @@ a)
     )
 
   (define (good-enough? prev-guess guess)
-    (< (abs (- guess prev-guess)) 0.001))
+    (< (/
+        (abs (- guess prev-guess))
+        guess
+        ) 0.001))
 
   (define (cube-root-iter prev-guess guess x)
     (if (good-enough? prev-guess guess)
@@ -131,4 +137,4 @@ a)
         (cube-root-iter guess (improve-cube-root-guess guess x) x)))
 
   (cube-root-iter 0 1.0 x)
-)
+  )
