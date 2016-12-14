@@ -1,0 +1,25 @@
+Dr Racket
+---------
+
+* Add the ubuntu PPA
+
+--------
+sudo add-apt-repository ppa:plt/racket
+sudo apt-get update
+--------
+
+* Install
+
+--------
+sudo apt install racket
+--------
+
+* Add SICP language support
+** Open Dr Racket then choose **File -> Package Manager**
+** In the **Do What I Mean** tab type **sicp** and install
+
+In any new file add this as the first line
+
+--------
+#lang sicp
+--------
